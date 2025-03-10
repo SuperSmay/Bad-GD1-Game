@@ -12,7 +12,7 @@ export default function Round() {
   const [currentTime, setCurrentTime] = useState(Date.now())
   const [startTime, setStartTime] = useState(Date.now())
   const [timeStep, setTimeStep] = useState(0)
-  const [tool, setTool] = useState('')
+  const [tool, setTool] = useState('Water')
   const [foodPoints, setFoodPoints] = useState(0)
 
   const [scene, setScene] = useContext(SceneContext)
@@ -83,8 +83,8 @@ export default function Round() {
             <p>Time remaining: {msToTime(roundLen - (currentTime - startTime))}</p>
             <p>Current Score: {foodPoints}</p>
             <Toolbar />
-            <p>{timeStep}</p>
-            <p>{tool}</p>
+            <p>Frame time: {timeStep}ms</p>
+            <p>Tool: {tool}</p>
             <div style={{display:'inline-grid', gridTemplateColumns:'100px 100px 100px 100px 100px 100px'}}>
               {
                 [...Array(36).keys()].map((i) => {
