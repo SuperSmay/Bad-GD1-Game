@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { TimeContext } from "./TimeContext"
 import PlantStats from "./PlantStats"
-
+import "./CropImage.css"
 
 export default function Crop(props) {
     
@@ -17,7 +17,7 @@ export default function Crop(props) {
         const growingTime = currentTime - props.plantTime
         const growthStage = Math.floor(Math.min(((growingTime / timeToCompletion) * 3) + 1, 4))
         return <div>
-            <img src={`./assets/corn/Corn_stage_${growthStage}.png`} alt="" width={100} style={{pointerEvents: 'none'}} />
+            <img src={`./assets/corn/Corn_stage_${growthStage}.png`} alt="" width={100} className="cropImage" />
         </div>
        
     }

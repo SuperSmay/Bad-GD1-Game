@@ -20,7 +20,7 @@ export default function FarmTile() {
 
     const cropGrowingTime = currentTime - plantTime
 
-    const waterDrainTime = 35
+    const waterDrainTime = 25
     const waterSittingTime = currentTime - lastWaterTime
     const calcCurrentWaterValue = Math.max(water - (waterSittingTime/waterDrainTime)/1000, 0) // + (waterCount * 1)
 
@@ -28,9 +28,14 @@ export default function FarmTile() {
 
     }, [])
     
+    function handleWater() {
+        setLastWaterTime(Date.now())
+        setWater(1)
+    }
 
     function onCellClick() {
         if (tool === 'Sickle') {
+            if (currentCrop === '') return
             // Figure out if plant is grown
             const cropRequiredGrowTime = PlantStats[currentCrop].growTime
             
@@ -44,15 +49,19 @@ export default function FarmTile() {
             setPlantTime(Date.now())
         }
         if (tool === 'Water') {
-            console.log("Water!")
-            console.log(calcCurrentWaterValue, cropGrowingTime)
-            setLastWaterTime(Date.now())
-            setWater(1)
+            handleWater()
+        }
+    }
+
+    function onCellMouseEnter(e) {
+        if (!e.buttons) return
+        if (tool === 'Water') {
+            handleWater()
         }
     }
     
 
-    return <div style={{width:100, height:100, backgroundColor:`hsl(33, ${30 + (35 * calcCurrentWaterValue)}%, ${60 - ((calcCurrentWaterValue) * 50)}%)`}} onClick={onCellClick}>
+    return <div style={{width:100, height:100, backgroundColor:`hsl(33, ${30 + (35 * calcCurrentWaterValue)}%, ${60 - ((calcCurrentWaterValue) * 50)}%)`}} onClick={onCellClick} onMouseEnter={onCellMouseEnter}>
         <Crop plantTime={plantTime} currentCrop={currentCrop} />
         {/* <p>{Math.trunc(calcCurrentWaterValue * 100)/100}</p> */}
     </div>
