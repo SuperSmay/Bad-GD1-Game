@@ -11,6 +11,7 @@ import { Row, Col, Container } from "react-bootstrap"
 export default function Round() {
   const [currentTime, setCurrentTime] = useState(Date.now())
   const [startTime, setStartTime] = useState(Date.now())
+  const [timeStep, setTimeStep] = useState(0)
   const [tool, setTool] = useState('')
   const [foodPoints, setFoodPoints] = useState(0)
 
@@ -39,16 +40,17 @@ export default function Round() {
 
     let loop;
  
-    function tick() {
+    function tick(prevTime) {
         let newTime = Date.now()
-
+        let timeDelta = prevTime ? newTime - prevTime : 0
         setCurrentTime(newTime)
+        setTimeStep(timeDelta)
         
         if (newTime - startTime > roundLen) {
             setScene('end')
         }
 
-        loop = requestAnimationFrame(tick)
+        loop = requestAnimationFrame(() => {tick(newTime)})
     }
 
     tick()
@@ -75,12 +77,13 @@ export default function Round() {
 
   return (
     <>
-      <TimeContext value={[startTime, currentTime]}>
+      <TimeContext value={[startTime, currentTime, timeStep]}>
         <ScoreContext value={[foodPoints, setFoodPoints]}>
           <ToolContext value={[tool, setTool]}>
             <p>Time remaining: {msToTime(roundLen - (currentTime - startTime))}</p>
             <p>Current Score: {foodPoints}</p>
             <Toolbar />
+            <p>{timeStep}</p>
             <p>{tool}</p>
             <div style={{display:'inline-grid', gridTemplateColumns:'100px 100px 100px 100px 100px 100px'}}>
               {

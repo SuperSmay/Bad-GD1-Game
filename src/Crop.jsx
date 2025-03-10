@@ -8,7 +8,7 @@ export default function Crop(props) {
 
     
 
-    const [startTime, currentTime] = useContext(TimeContext)
+    const [startTime, currentTime, timeStep] = useContext(TimeContext)
     
     
     
