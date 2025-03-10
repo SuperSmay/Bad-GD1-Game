@@ -26,8 +26,8 @@ export default function Toolbar() {
     }, [])
 
     return <div>
-        <button onClick={() => setTool("Sickle")}>Sickle</button>
-        <button onClick={() => setTool("Water")}>Water</button>
-        <button onClick={() => setTool("Seed")}>Seed</button>
+        <button onClick={() => setTool("Sickle")}>Sickle (1)</button>
+        <button onClick={() => setTool("Water")}>Water (2)</button>
+        <button onClick={() => setTool("Seed")}>Seed (3)</button>
     </div>
 }
