@@ -25,8 +25,10 @@ export default function FarmTile() {
     const calcCurrentWaterValue = Math.max(water - (waterSittingTime/waterDrainTime)/1000, 0) // + (waterCount * 1)
 
     useEffect(() => {
-
-    }, [])
+        if (calcCurrentWaterValue === 0) {
+            setCurrentCrop('')
+        }
+    }, [currentTime])
     
     function handleWater() {
         setLastWaterTime(Date.now())
