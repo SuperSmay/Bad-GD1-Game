@@ -86,7 +86,7 @@ export default function Round() {
             <p>Tool: {tool}</p>
             <div style={{display:'inline-grid', gridTemplateColumns:'100px 100px 100px 100px 100px', padding: '50px', backgroundImage:'url(Background.png)'}}>
               {
-                [...Array(252).keys()].map((i) => {
+                [...Array(25).keys()].map((i) => {
                   return <FarmTile key={i} />
                 })
               }
