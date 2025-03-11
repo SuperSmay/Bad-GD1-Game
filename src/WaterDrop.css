@@ -1,0 +1,9 @@
+@keyframes fadeIn { 
+    from { opacity: 0; } 
+  }
+  
+  .animate-flicker {
+      animation: fadeIn 1s infinite alternate;
+  }
+
+  /* Found https://stackoverflow.com/questions/23985018/simple-css-animation-loop-fading-in-out-loading-text*/

@@ -6,7 +6,6 @@ import { TimeContext } from './TimeContext.js';
 import { ToolContext } from './ToolContext.js';
 import { ScoreContext } from './ScoreContext.js';
 import { SceneContext } from './SceneContext.js';
-import { Row, Col, Container } from "react-bootstrap"
 
 export default function Round() {
   const [currentTime, setCurrentTime] = useState(Date.now())
@@ -19,6 +18,9 @@ export default function Round() {
 
   //               mins secs ms
   const roundLen = 3 * 60 * 1000
+
+  const gridSize = 5
+  const gridWidth = Math.round((600 - (80*2)) / gridSize)
 
   // Adapted from https://medium.com/@primaramadhanip/building-a-countdown-timer-in-react-db93167157b7
   useEffect(() => {
@@ -89,15 +91,13 @@ export default function Round() {
             <Toolbar />
             <p>Frame time: {timeStep}ms</p>
             <p>Tool: {tool}</p>
-            <div style={{display:'inline-grid', gridTemplateColumns:'100px 100px 100px 100px 100px 100px'}}>
+            <div style={{display:'inline-grid', gridTemplateColumns:`${(gridWidth + "px ").repeat(gridSize)}`, padding: '80px', backgroundImage:'url(Background.png)'}}>
               {
-                [...Array(36).keys()].map((i) => {
+                [...Array(gridSize * gridSize).keys()].map((i) => {
                   return <FarmTile key={i} />
                 })
               }
             </div>
-            
-            
           </ToolContext>
         </ScoreContext>
         
