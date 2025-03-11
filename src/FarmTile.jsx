@@ -4,6 +4,8 @@ import { TimeContext } from './TimeContext.js';
 import { ToolContext } from './ToolContext.js';
 import { ScoreContext } from './ScoreContext.js';
 import PlantStats from './PlantStats.js';
+import './WaterDrop.css'
+import './CropImage.css'
 
 export default function FarmTile() {
 
@@ -63,8 +65,16 @@ export default function FarmTile() {
     }
     
 
-    return <div style={{width:'100%', aspectRatio:'1', backgroundColor:`hsl(33, ${30 + (35 * calcCurrentWaterValue)}%, ${60 - ((calcCurrentWaterValue) * 50)}%)`}} onClick={onCellClick} onMouseEnter={onCellMouseEnter}>
-        <Crop plantTime={plantTime} currentCrop={currentCrop} />
+    // https://stackoverflow.com/questions/1909648/stacking-divs-on-top-of-each-other
+    // Using this trick to overlay multiple divs. position: absolute doesn't work well because I want to keep the 100% size working
+    return <div style={{height:'100%', aspectRatio:'1', backgroundColor:`hsl(33, ${30 + (35 * calcCurrentWaterValue)}%, ${60 - ((calcCurrentWaterValue) * 50)}%)`, display:'grid', gridTemplate:'1fr / 1fr', placeItems:'center'}} onClick={onCellClick} onMouseEnter={onCellMouseEnter}>
+        <div style={{gridColumn: '1 / 1', gridRow: '1 / 1', height:'100%', aspectRatio:'1'}}> 
+            <Crop plantTime={plantTime} currentCrop={currentCrop} />
+        </div>
+        {calcCurrentWaterValue < 0.5 ? <div style={{gridColumn: '1 / 1', gridRow: '1 / 1', height:'100%', aspectRatio:'1'}}>
+            <img src="assets/Droplet.png" width='75%' alt="" style={{imageRendering:'pixelated'}} className='animate-flicker crop-image'/>
+        </div> : <></>}
+        
         {/* <p>{Math.trunc(calcCurrentWaterValue * 100)/100}</p> */}
     </div>
 }

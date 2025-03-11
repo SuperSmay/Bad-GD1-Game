@@ -17,7 +17,7 @@ export default function Crop(props) {
         const growingTime = currentTime - props.plantTime
         const growthStage = Math.floor(Math.min(((growingTime / timeToCompletion) * 3) + 1, 4))
         return <div>
-            <img src={`./assets/corn/Corn_stage_${growthStage}.png`} alt="" width={'100%'} style={{imageRendering:'pixelated'}} className="cropImage" />
+            <img src={`./assets/corn/Corn_stage_${growthStage}.png`} alt="" width={'100%'} style={{imageRendering:'pixelated'}} className="crop-image" />
         </div>
        
     }
