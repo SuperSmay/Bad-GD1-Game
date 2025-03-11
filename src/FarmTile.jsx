@@ -63,7 +63,7 @@ export default function FarmTile() {
     }
     
 
-    return <div style={{width:100, height:100, backgroundColor:`hsl(33, ${30 + (35 * calcCurrentWaterValue)}%, ${60 - ((calcCurrentWaterValue) * 50)}%)`}} onClick={onCellClick} onMouseEnter={onCellMouseEnter}>
+    return <div style={{width:90, height:90, backgroundColor:`hsl(33, ${30 + (35 * calcCurrentWaterValue)}%, ${60 - ((calcCurrentWaterValue) * 50)}%)`}} onClick={onCellClick} onMouseEnter={onCellMouseEnter}>
         <Crop plantTime={plantTime} currentCrop={currentCrop} />
         {/* <p>{Math.trunc(calcCurrentWaterValue * 100)/100}</p> */}
     </div>

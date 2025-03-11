@@ -84,7 +84,7 @@ export default function Round() {
             <Toolbar />
             <p>Frame time: {timeStep}ms</p>
             <p>Tool: {tool}</p>
-            <div style={{display:'inline-grid', gridTemplateColumns:'100px 100px 100px 100px 100px', padding: '50px', backgroundImage:'url(Background.png)'}}>
+            <div style={{display:'inline-grid', gridTemplateColumns:'90px 90px 90px 90px 90px', padding: '80px', backgroundImage:'url(Background.png)'}}>
               {
                 [...Array(25).keys()].map((i) => {
                   return <FarmTile key={i} />
