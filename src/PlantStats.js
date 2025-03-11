@@ -1,8 +1,10 @@
 export default {
     corn: {
-        growTime: 30000
+        growTime: 20 * 1000,    // 30 seconds
+        value: 10
     },
     soybean: {
-        growTime: 50000
+        growTime: 35 * 1000,    // 50 seconds
+        value: 15
     }
 }

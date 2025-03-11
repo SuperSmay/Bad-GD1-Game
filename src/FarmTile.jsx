@@ -23,9 +23,11 @@ export default function FarmTile() {
     const cropGrowingTime = currentTime - plantTime
 
     // Deal with how much water is left in the tile
-    const waterDrainTime = 25
+    const waterDrainTime = 50
     const waterSittingTime = currentTime - lastWaterTime
     const calcCurrentWaterValue = Math.max(water - (waterSittingTime/waterDrainTime)/1000, 0) // + (waterCount * 1)
+
+    const [cropRequiredGrowTime, setCropRequiredGrowTime] = useState(0)
 
     useEffect(() => {
         // If we run out of water, kill the crop
@@ -33,6 +35,18 @@ export default function FarmTile() {
             setCurrentCrop('')
         }
     }, [currentTime])
+
+
+    // Make crop go slower with less water
+    // Not working so far
+    useEffect(() => {
+        const interval = setInterval(() => {
+            // Make the crop grow slower, double the time if there is no water, less if there is more water
+            setCropRequiredGrowTime(prev => prev + (1 - calcCurrentWaterValue) * 1000)  // TODO: This is not quite working and I'm not sure why
+        },  1000);
+
+        return () => clearInterval(interval);
+    }, []);
     
     // Function to water the plant
     function handleWater() {
@@ -47,16 +61,20 @@ export default function FarmTile() {
             if (currentCrop === '') return
 
             // Figure out if plant is grown
-            const cropRequiredGrowTime = PlantStats[currentCrop].growTime
-            
             if (cropGrowingTime > cropRequiredGrowTime) {
-                setFoodPoints((prev) => prev + 10)
+                setFoodPoints((prev) => prev + PlantStats[currentCrop].value)
             }
             setCurrentCrop('')
         }
-        if (tool === 'Seed') {
+        if (tool === 'Corn Seeds') {
             setCurrentCrop('corn')
             setPlantTime(Date.now())
+            setCropRequiredGrowTime(PlantStats.corn.growTime)
+        }
+        if (tool === 'Soybean Seeds') {
+            setCurrentCrop('soybean')
+            setPlantTime(Date.now())
+            setCropRequiredGrowTime(PlantStats.soybean.growTime)
         }
         if (tool === 'Water') {
             handleWater()

@@ -16,7 +16,10 @@ export default function Toolbar() {
                 setTool("Water")
             }
             if (e.key === '3') {
-                setTool("Seed")
+                setTool("Corn Seeds")
+            }
+            if (e.key === '4') {
+                setTool("Soybean Seeds")
             }
         }
 
@@ -32,6 +35,7 @@ export default function Toolbar() {
     return <div>
         <button onClick={() => setTool("Sickle")}>Sickle (1)</button>
         <button onClick={() => setTool("Water")}>Water (2)</button>
-        <button onClick={() => setTool("Seed")}>Seed (3)</button>
+        <button onClick={() => setTool("Corn Seeds")}>Corn Seeds (3)</button>
+        <button onClick={() => setTool("Soybean Seeds")}>Soybean Seeds (4)</button>
     </div>
 }

@@ -28,8 +28,9 @@ function App() {
   
     { scene === 'end' ? 
     // Code for end
+    // TODO: Maybe include the final score here:
     <div>
-      <p>You win!!</p>
+      <p>Game Over!!</p>
       <button onClick={() => setScene('mainMenu')}>Back to main</button>
     </div> : <></>
     }
