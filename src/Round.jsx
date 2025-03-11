@@ -17,6 +17,7 @@ export default function Round() {
 
   const [scene, setScene] = useContext(SceneContext)
 
+  //               mins secs ms
   const roundLen = 3 * 60 * 1000
 
   // Adapted from https://medium.com/@primaramadhanip/building-a-countdown-timer-in-react-db93167157b7
@@ -60,6 +61,8 @@ export default function Round() {
 }, [])
 
     /**
+     * This function converts milliseconds to a string in the format mm:ss
+     *
      * Copied straight from the Google AI Overview after searching "js ms to time", then I removed the hours part. It nailed it.
      * @param {Number} ms Duration in ms
      * @returns {String} The duration in mm:ss
@@ -76,6 +79,7 @@ export default function Round() {
     }
 
   return (
+    // This contains the page for the main game loop
     <>
       <TimeContext value={[startTime, currentTime, timeStep]}>
         <ScoreContext value={[foodPoints, setFoodPoints]}>

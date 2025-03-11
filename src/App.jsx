@@ -10,18 +10,24 @@ function App() {
 
   return <SceneContext value={[scene, setScene]}>
     { scene === 'mainMenu' ? 
+
+    // Code for main menu
     <div>
+      <h1>Name TBD!</h1>
+      <p>By: Team 1</p>
       <button onClick={() => {setScene('round')}}>Start!</button>
     </div> : <></>
     }
 
     { scene === 'round' ? 
+    // Code the game round
     <div>
       <Round />
     </div> : <></>
     }
   
     { scene === 'end' ? 
+    // Code for end
     <div>
       <p>You win!!</p>
       <button onClick={() => setScene('mainMenu')}>Back to main</button>
