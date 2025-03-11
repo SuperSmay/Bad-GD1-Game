@@ -1,6 +1,8 @@
 # Farming Game Thingy
 
-Source code for the farming game thingy, written in React.
+Source code for Bloomfield, draft 1, written in React.
+
+You can play it at [https://supersmay.github.io/Bad-GD1-Game/](https://supersmay.github.io/Bad-GD1-Game/)
 
 Run with 
 ```bash
