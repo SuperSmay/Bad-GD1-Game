@@ -6,6 +6,7 @@ import { ScoreContext } from './ScoreContext.js';
 import PlantStats from './PlantStats.js';
 import './WaterDrop.css'
 import './CropImage.css'
+import './Shadow.css'
 
 export default function FarmTile() {
 
@@ -26,6 +27,9 @@ export default function FarmTile() {
     const waterSittingTime = currentTime - lastWaterTime
     const calcCurrentWaterValue = Math.max(water - (waterSittingTime/waterDrainTime)/1000, 0) // + (waterCount * 1)
 
+    // Figure out if plant is grown
+    const cropRequiredGrowTime = currentCrop ? PlantStats[currentCrop].growTime : Number.POSITIVE_INFINITY
+
     useEffect(() => {
         if (calcCurrentWaterValue === 0) {
             setCurrentCrop('')
@@ -40,8 +44,7 @@ export default function FarmTile() {
     function onCellClick() {
         if (tool === 'Sickle') {
             if (currentCrop === '') return
-            // Figure out if plant is grown
-            const cropRequiredGrowTime = PlantStats[currentCrop].growTime
+            
             
             if (cropGrowingTime > cropRequiredGrowTime) {
                 setFoodPoints((prev) => prev + 10)
@@ -71,8 +74,14 @@ export default function FarmTile() {
         <div style={{gridColumn: '1 / 1', gridRow: '1 / 1', height:'100%', aspectRatio:'1'}}> 
             <Crop plantTime={plantTime} currentCrop={currentCrop} />
         </div>
-        {calcCurrentWaterValue < 0.5 ? <div style={{gridColumn: '1 / 1', gridRow: '1 / 1', height:'100%', aspectRatio:'1'}}>
-            <img src="assets/Droplet.png" width='75%' alt="" style={{imageRendering:'pixelated'}} className='animate-flicker crop-image'/>
+        {calcCurrentWaterValue < 0.5 && calcCurrentWaterValue > 0.1 && currentCrop? <div style={{gridColumn: '1 / 1', gridRow: '1 / 1', height:'100%', aspectRatio:'1', opacity:'75%'}}>
+            <img src="assets/Droplet.png" width='75%' alt="" style={{imageRendering:'pixelated'}} className='animate-flicker crop-image shadow'/>
+        </div> : <></>}
+        {calcCurrentWaterValue < 0.1 ? <div style={{gridColumn: '1 / 1', gridRow: '1 / 1', height:'100%', aspectRatio:'1', opacity:'75%'}}>
+            <img src="assets/XDroplet.png" width='75%' alt="" style={{imageRendering:'pixelated'}} className='animate-flicker crop-image shadow'/>
+        </div> : <></>}
+        {cropGrowingTime > cropRequiredGrowTime ? <div style={{gridColumn: '1 / 1', gridRow: '1 / 1', height:'100%', aspectRatio:'1', opacity:'75%'}}>
+            <img src="assets/Sickle.png" width='75%' alt="" style={{imageRendering:'pixelated'}} className='animate-flicker crop-image shadow'/>
         </div> : <></>}
         
         {/* <p>{Math.trunc(calcCurrentWaterValue * 100)/100}</p> */}
