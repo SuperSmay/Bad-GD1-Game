@@ -31,7 +31,7 @@ export default function FarmTile() {
     const calcCurrentWaterValue = Math.max(water - (waterSittingTime/waterDrainTime)/1000, 0) // + (waterCount * 1)
 
     // Figure out if plant is grown
-    const cropRequiredGrowTime = currentCrop ? PlantStats[currentCrop].growTime : Number.POSITIVE_INFINITY
+    const [cropRequiredGrowTime, setCropRequiredGrowTime] = useState(0)
 
     useEffect(() => {
         // If we run out of water, kill the crop
@@ -108,7 +108,7 @@ export default function FarmTile() {
         {calcCurrentWaterValue < 0.1 ? <div style={{gridColumn: '1 / 1', gridRow: '1 / 1', height:'100%', aspectRatio:'1', opacity:'75%'}}>
             <img src="assets/XDroplet.png" width='75%' alt="" style={{imageRendering:'pixelated'}} className='animate-flicker crop-image shadow'/>
         </div> : <></>}
-        {cropGrowingTime > cropRequiredGrowTime ? <div style={{gridColumn: '1 / 1', gridRow: '1 / 1', height:'100%', aspectRatio:'1', opacity:'75%'}}>
+        {cropGrowingTime > cropRequiredGrowTime && currentCrop !== '' ? <div style={{gridColumn: '1 / 1', gridRow: '1 / 1', height:'100%', aspectRatio:'1', opacity:'75%'}}>
             <img src="assets/Sickle.png" width='75%' alt="" style={{imageRendering:'pixelated'}} className='animate-flicker crop-image shadow'/>
         </div> : <></>}
         
