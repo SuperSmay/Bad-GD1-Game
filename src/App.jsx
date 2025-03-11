@@ -13,8 +13,8 @@ function App() {
 
     // Code for main menu
     <div>
-      <h1>Name TBD!</h1>
-      <p>By: Team 1</p>
+      <h1>Bloomfield Farm</h1>
+      <p>Celestia Studio</p>
       <button onClick={() => {setScene('round')}}>Start!</button>
     </div> : <></>
     }
